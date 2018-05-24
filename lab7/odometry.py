@@ -45,7 +45,7 @@ def get_front_wheel_radius():
 	"""Returns the radius of the Cozmo robot's front wheel in millimeters."""
 	# ####
 	# TODO: Empirically determine the radius of the robot's front wheel using the
-	# cozmo_drive_straight() function. You can write a separate script for doing 
+	# cozmo_drive_straight() function. You can write a separate script for doing
 	# experiments to determine the radius. This function should return the radius
 	# in millimeters. Write a comment that explains how you determined it and any
 	# computation you do as part of this function.
@@ -158,7 +158,7 @@ def my_go_to_pose2(robot, x, y, angle_z):
 	"""
 	# ####
 	# TODO: Implement a function that makes the robot move to a desired pose
-	# using the robot.drive_wheels() function to jointly move and rotate the 
+	# using the robot.drive_wheels() function to jointly move and rotate the
 	# robot to reduce distance between current and desired pose (Approach 2).
 	# ####
 	#get the goal in world coordinates so that when we move the goal isnt moving
@@ -248,6 +248,3 @@ def run(robot: cozmo.robot.Robot):
 if __name__ == '__main__':
 
 	cozmo.run_program(run)
-
-
-

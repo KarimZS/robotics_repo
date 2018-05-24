@@ -45,7 +45,7 @@ async def braitenberg_machine(robot: cozmo.robot.Robot):
 	print("Press CTRL-C to quit")
 
 	while True:
-		
+
 		#get camera image
 		event = await robot.world.wait_for(cozmo.camera.EvtNewRawCameraImage, timeout=30)
 

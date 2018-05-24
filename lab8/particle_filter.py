@@ -8,7 +8,7 @@ import sys
 def motion_update(particles, odom):
     """ Particle filter motion update
 
-        Arguments: 
+        Arguments:
         particles -- input list of particle represents belief p(x_{t-1} | u_{t-1})
                 before motion update
         odom -- odometry to move (dx, dy, dh) in *robot local frame*
@@ -28,7 +28,7 @@ def motion_update(particles, odom):
 def measurement_update(particles, measured_marker_list, grid):
     """ Particle filter measurement update
 
-        Arguments: 
+        Arguments:
         particles -- input list of particle represents belief \tilde{p}(x_{t} | u_{t})
                 before meansurement update (but after motion update)
 
@@ -42,7 +42,7 @@ def measurement_update(particles, measured_marker_list, grid):
                 which is defined by ROBOT_CAMERA_FOV_DEG in setting.py
 				* Note that the robot can see mutliple markers at once, and may not see any one
 
-        grid -- grid world map, which contains the marker information, 
+        grid -- grid world map, which contains the marker information,
                 see grid.py and CozGrid for definition
                 Can be used to evaluate particles
 
@@ -85,5 +85,3 @@ def measurement_update(particles, measured_marker_list, grid):
     measured_particles = numpy.random.choice(particles, size = resampling_size, p = particle_weights).tolist()#choose randomly based on weight
     measured_particles+=Particle.create_random(random_particles_count, grid)#add random particles
     return measured_particles
-
-

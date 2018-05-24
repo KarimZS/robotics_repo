@@ -121,4 +121,3 @@ async def run(robot: cozmo.robot.Robot):
 
 if __name__ == '__main__':
     cozmo.run_program(run, use_viewer = True, force_viewer_on_top = True)
-

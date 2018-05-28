@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -43,9 +43,15 @@ class ValueIterationAgent(ValueEstimationAgent):
         self.iterations = iterations
         self.values = util.Counter() # A Counter is a dict with default 0
 
-        # Write value iteration code here
-        "*** YOUR CODE HERE ***"
-
+        # run through iteration times
+        for iteration in range(iterations):
+            newValues = util.Counter()
+            #calculate the new value for each state based on its current value as described in notes
+            for state in mdp.getStates():
+                policy = self.getPolicy(state)
+                if not policy == None:
+                    newValues[state] = self.getQValue(state, policy)
+            self.values = newValues
 
     def getValue(self, state):
         """
@@ -53,14 +59,16 @@ class ValueIterationAgent(ValueEstimationAgent):
         """
         return self.values[state]
 
-
     def computeQValueFromValues(self, state, action):
         """
           Compute the Q-value of action in state from the
           value function stored in self.values.
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        #following the equation from notes
+        q = 0
+        for t in self.mdp.getTransitionStatesAndProbs(state, action):
+            q = q + (t[1] * (self.discount * self.getValue(t[0]) + self.mdp.getReward(state, action, t[0])))
+        return q
 
     def computeActionFromValues(self, state):
         """
@@ -71,8 +79,15 @@ class ValueIterationAgent(ValueEstimationAgent):
           there are no legal actions, which is the case at the
           terminal state, you should return None.
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        actions = self.mdp.getPossibleActions(state)
+        max = None
+        best_action = None
+        for action in actions:
+            q = self.computeQValueFromValues(state, action)
+            if max == None or q > max:
+                max = q
+                best_action = action
+        return best_action
 
     def getPolicy(self, state):
         return self.computeActionFromValues(state)
